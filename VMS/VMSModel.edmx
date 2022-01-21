@@ -1,0 +1,775 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="VmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BranchMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusId" Type="bit" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditedOn" Type="datetime" />
+          <Property Name="CompanyID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusId" Type="bit" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="EditedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DepartmentDesc" Type="varchar" MaxLength="150" />
+          <Property Name="EditedBy" Type="varchar" MaxLength="50" />
+          <Property Name="EditedOn" Type="datetime" />
+          <Property Name="BranchID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLogMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrorMessage" Type="varchar(max)" />
+          <Property Name="ErrorDateTime" Type="datetime" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="ControllerName" Type="varchar" MaxLength="50" />
+          <Property Name="MethodName" Type="varchar" MaxLength="50" />
+          <Property Name="InnerErrorMessage" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="MenuMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ControllerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MethodName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Order_by" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentID" Type="uniqueidentifier" />
+          <Property Name="IsDropDown" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Authorization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MenuId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StatusId" Type="bit" Nullable="false" />
+          <Property Name="BranchId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VisitorID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VisitPurposeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CardNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar(max)" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="50" />
+          <Property Name="VisitFor" Type="nvarchar" MaxLength="50" />
+          <Property Name="DepartmentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsMannual" Type="bit" Nullable="false" />
+          <Property Name="CheckIN" Type="datetime" />
+          <Property Name="CheckOUT" Type="datetime" />
+          <Property Name="Duration" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VisitorMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="25" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CityID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="25" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="25" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="25" />
+          <Property Name="Email" Type="nvarchar" MaxLength="25" />
+          <Property Name="Web" Type="nvarchar" MaxLength="25" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ValidUntill" Type="datetime" />
+          <Property Name="VisitorStatusID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VisitorTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="VisitorStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VisitorStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitorType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VisitorType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VisitPurpose">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="VisitPurpose" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BranchMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BranchMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentMaster_BranchMaster">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="1" />
+          <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DepartmentMaster">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentMaster_DepartmentMaster">
+          <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="1" />
+          <End Role="DepartmentMaster1" Type="Self.DepartmentMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentMaster">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DepartmentMaster1">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Authorization_MenuMaster">
+          <End Role="MenuMaster" Type="Self.MenuMaster" Multiplicity="1" />
+          <End Role="User_Authorization" Type="Self.User_Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Authorization">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Authorization_User_Roles">
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="1" />
+          <End Role="User_Authorization" Type="Self.User_Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User_Authorization">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_BranchMaster">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_User_Roles">
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VmsModelStoreContainer">
+          <EntitySet Name="BranchMaster" EntityType="Self.BranchMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyMaster" EntityType="Self.CompanyMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DepartmentMaster" EntityType="Self.DepartmentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLogMaster" EntityType="Self.ErrorLogMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuMaster" EntityType="Self.MenuMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Authorization" EntityType="Self.User_Authorization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMaster" EntityType="Self.UserMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitDetails" EntityType="Self.VisitDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitorMaster" EntityType="Self.VisitorMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitorStatus" EntityType="Self.VisitorStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitorType" EntityType="Self.VisitorType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VisitPurpose" EntityType="Self.VisitPurpose" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BranchMaster_CompanyMaster" Association="Self.FK_BranchMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMaster" />
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentMaster_BranchMaster" Association="Self.FK_DepartmentMaster_BranchMaster">
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+            <End Role="DepartmentMaster" EntitySet="DepartmentMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentMaster_DepartmentMaster" Association="Self.FK_DepartmentMaster_DepartmentMaster">
+            <End Role="DepartmentMaster" EntitySet="DepartmentMaster" />
+            <End Role="DepartmentMaster1" EntitySet="DepartmentMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Authorization_MenuMaster" Association="Self.FK_User_Authorization_MenuMaster">
+            <End Role="MenuMaster" EntitySet="MenuMaster" />
+            <End Role="User_Authorization" EntitySet="User_Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Authorization_User_Roles" Association="Self.FK_User_Authorization_User_Roles">
+            <End Role="User_Roles" EntitySet="User_Roles" />
+            <End Role="User_Authorization" EntitySet="User_Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_BranchMaster" Association="Self.FK_UserMaster_BranchMaster">
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_User_Roles" Association="Self.FK_UserMaster_User_Roles">
+            <End Role="User_Roles" EntitySet="User_Roles" />
+            <End Role="UserMaster" EntitySet="UserMaster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BranchMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Boolean" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EditedOn" Type="DateTime" Precision="3" />
+          <Property Name="CompanyID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="CompanyMaster" Relationship="Self.FK_BranchMaster_CompanyMaster" FromRole="BranchMaster" ToRole="CompanyMaster" />
+          <NavigationProperty Name="DepartmentMasters" Relationship="Self.FK_DepartmentMaster_BranchMaster" FromRole="BranchMaster" ToRole="DepartmentMaster" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_BranchMaster" FromRole="BranchMaster" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="CompanyMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusId" Type="Boolean" Nullable="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EditedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BranchMasters" Relationship="Self.FK_BranchMaster_CompanyMaster" FromRole="CompanyMaster" ToRole="BranchMaster" />
+        </EntityType>
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Guid" Nullable="false" />
+          <Property Name="DepartmentDesc" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="EditedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EditedOn" Type="DateTime" Precision="3" />
+          <Property Name="BranchID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="BranchMaster" Relationship="Self.FK_DepartmentMaster_BranchMaster" FromRole="DepartmentMaster" ToRole="BranchMaster" />
+          <NavigationProperty Name="DepartmentMaster1" Relationship="Self.FK_DepartmentMaster_DepartmentMaster" FromRole="DepartmentMaster" ToRole="DepartmentMaster1" />
+          <NavigationProperty Name="DepartmentMaster2" Relationship="Self.FK_DepartmentMaster_DepartmentMaster" FromRole="DepartmentMaster1" ToRole="DepartmentMaster" />
+        </EntityType>
+        <EntityType Name="MenuMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Caption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Order_by" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Guid" />
+          <Property Name="IsDropDown" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User_Authorization" Relationship="Self.FK_User_Authorization_MenuMaster" FromRole="MenuMaster" ToRole="User_Authorization" />
+        </EntityType>
+        <EntityType Name="User_Authorization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="MenuId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="MenuMaster" Relationship="Self.FK_User_Authorization_MenuMaster" FromRole="User_Authorization" ToRole="MenuMaster" />
+          <NavigationProperty Name="User_Roles" Relationship="Self.FK_User_Authorization_User_Roles" FromRole="User_Authorization" ToRole="User_Roles" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User_Authorization" Relationship="Self.FK_User_Authorization_User_Roles" FromRole="User_Roles" ToRole="User_Authorization" />
+          <NavigationProperty Name="UserMasters" Relationship="Self.FK_UserMaster_User_Roles" FromRole="User_Roles" ToRole="UserMaster" />
+        </EntityType>
+        <EntityType Name="UserMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="StatusId" Type="Boolean" Nullable="false" />
+          <Property Name="BranchId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="BranchMaster" Relationship="Self.FK_UserMaster_BranchMaster" FromRole="UserMaster" ToRole="BranchMaster" />
+          <NavigationProperty Name="User_Roles" Relationship="Self.FK_UserMaster_User_Roles" FromRole="UserMaster" ToRole="User_Roles" />
+        </EntityType>
+        <Association Name="FK_BranchMaster_CompanyMaster">
+          <End Role="CompanyMaster" Type="Self.CompanyMaster" Multiplicity="1" />
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BranchMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentMaster_BranchMaster">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="1" />
+          <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DepartmentMaster">
+              <PropertyRef Name="BranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_BranchMaster">
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BranchMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="BranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DepartmentMaster_DepartmentMaster">
+          <End Role="DepartmentMaster" Type="Self.DepartmentMaster" Multiplicity="1" />
+          <End Role="DepartmentMaster1" Type="Self.DepartmentMaster" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentMaster">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DepartmentMaster1">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Authorization_MenuMaster">
+          <End Role="MenuMaster" Type="Self.MenuMaster" Multiplicity="1" />
+          <End Role="User_Authorization" Type="Self.User_Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Authorization">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Authorization_User_Roles">
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="1" />
+          <End Role="User_Authorization" Type="Self.User_Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User_Authorization">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserMaster_User_Roles">
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="1" />
+          <End Role="UserMaster" Type="Self.UserMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserMaster">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VmsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BranchMasters" EntityType="Self.BranchMaster" />
+          <EntitySet Name="CompanyMasters" EntityType="Self.CompanyMaster" />
+          <EntitySet Name="DepartmentMasters" EntityType="Self.DepartmentMaster" />
+          <EntitySet Name="MenuMasters" EntityType="Self.MenuMaster" />
+          <EntitySet Name="User_Authorization" EntityType="Self.User_Authorization" />
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" />
+          <EntitySet Name="UserMasters" EntityType="Self.UserMaster" />
+          <AssociationSet Name="FK_BranchMaster_CompanyMaster" Association="Self.FK_BranchMaster_CompanyMaster">
+            <End Role="CompanyMaster" EntitySet="CompanyMasters" />
+            <End Role="BranchMaster" EntitySet="BranchMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentMaster_BranchMaster" Association="Self.FK_DepartmentMaster_BranchMaster">
+            <End Role="BranchMaster" EntitySet="BranchMasters" />
+            <End Role="DepartmentMaster" EntitySet="DepartmentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_BranchMaster" Association="Self.FK_UserMaster_BranchMaster">
+            <End Role="BranchMaster" EntitySet="BranchMasters" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DepartmentMaster_DepartmentMaster" Association="Self.FK_DepartmentMaster_DepartmentMaster">
+            <End Role="DepartmentMaster" EntitySet="DepartmentMasters" />
+            <End Role="DepartmentMaster1" EntitySet="DepartmentMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Authorization_MenuMaster" Association="Self.FK_User_Authorization_MenuMaster">
+            <End Role="MenuMaster" EntitySet="MenuMasters" />
+            <End Role="User_Authorization" EntitySet="User_Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Authorization_User_Roles" Association="Self.FK_User_Authorization_User_Roles">
+            <End Role="User_Roles" EntitySet="User_Roles" />
+            <End Role="User_Authorization" EntitySet="User_Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserMaster_User_Roles" Association="Self.FK_UserMaster_User_Roles">
+            <End Role="User_Roles" EntitySet="User_Roles" />
+            <End Role="UserMaster" EntitySet="UserMasters" />
+          </AssociationSet>
+          <EntitySet Name="ErrorLogMasters" EntityType="VmsModel.ErrorLogMaster" />
+          <EntitySet Name="VisitDetails" EntityType="VmsModel.VisitDetail" />
+          <EntitySet Name="VisitorMasters" EntityType="VmsModel.VisitorMaster" />
+          <EntitySet Name="VisitorStatus" EntityType="VmsModel.VisitorStatu" />
+          <EntitySet Name="VisitorTypes" EntityType="VmsModel.VisitorType" />
+          <EntitySet Name="VisitPurposes" EntityType="VmsModel.VisitPurpose" />
+        </EntityContainer>
+        <EntityType Name="ErrorLogMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ControllerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InnerErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VisitDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VisitorID" Type="Guid" Nullable="false" />
+          <Property Name="VisitPurposeID" Type="Guid" Nullable="false" />
+          <Property Name="CardNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VisitFor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentID" Type="Guid" Nullable="false" />
+          <Property Name="IsMannual" Type="Boolean" Nullable="false" />
+          <Property Name="CheckIN" Type="DateTime" Precision="3" />
+          <Property Name="CheckOUT" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VisitorMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CityID" Type="Guid" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Web" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValidUntill" Type="DateTime" Precision="3" />
+          <Property Name="VisitorStatusID" Type="Guid" Nullable="false" />
+          <Property Name="VisitorTypeID" Type="Guid" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VisitorStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VisitorStatus" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VisitorType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VisitorType1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VisitPurpose">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="VisitPurpose1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VmsModelStoreContainer" CdmEntityContainer="VmsEntities">
+          <EntitySetMapping Name="BranchMasters">
+            <EntityTypeMapping TypeName="VmsModel.BranchMaster">
+              <MappingFragment StoreEntitySet="BranchMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyMasters">
+            <EntityTypeMapping TypeName="VmsModel.CompanyMaster">
+              <MappingFragment StoreEntitySet="CompanyMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentMasters">
+            <EntityTypeMapping TypeName="VmsModel.DepartmentMaster">
+              <MappingFragment StoreEntitySet="DepartmentMaster">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentDesc" ColumnName="DepartmentDesc" />
+                <ScalarProperty Name="EditedBy" ColumnName="EditedBy" />
+                <ScalarProperty Name="EditedOn" ColumnName="EditedOn" />
+                <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuMasters">
+            <EntityTypeMapping TypeName="VmsModel.MenuMaster">
+              <MappingFragment StoreEntitySet="MenuMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Order_by" ColumnName="Order_by" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="IsDropDown" ColumnName="IsDropDown" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Authorization">
+            <EntityTypeMapping TypeName="VmsModel.User_Authorization">
+              <MappingFragment StoreEntitySet="User_Authorization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Roles">
+            <EntityTypeMapping TypeName="VmsModel.User_Roles">
+              <MappingFragment StoreEntitySet="User_Roles">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMasters">
+            <EntityTypeMapping TypeName="VmsModel.UserMaster">
+              <MappingFragment StoreEntitySet="UserMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogMasters">
+            <EntityTypeMapping TypeName="VmsModel.ErrorLogMaster">
+              <MappingFragment StoreEntitySet="ErrorLogMaster">
+                <ScalarProperty Name="InnerErrorMessage" ColumnName="InnerErrorMessage" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+                <ScalarProperty Name="ControllerName" ColumnName="ControllerName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ErrorDateTime" ColumnName="ErrorDateTime" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitDetails">
+            <EntityTypeMapping TypeName="VmsModel.VisitDetail">
+              <MappingFragment StoreEntitySet="VisitDetails">
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="CheckOUT" ColumnName="CheckOUT" />
+                <ScalarProperty Name="CheckIN" ColumnName="CheckIN" />
+                <ScalarProperty Name="IsMannual" ColumnName="IsMannual" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="VisitFor" ColumnName="VisitFor" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="VisitPurposeID" ColumnName="VisitPurposeID" />
+                <ScalarProperty Name="VisitorID" ColumnName="VisitorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitorMasters">
+            <EntityTypeMapping TypeName="VmsModel.VisitorMaster">
+              <MappingFragment StoreEntitySet="VisitorMaster">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="VisitorTypeID" ColumnName="VisitorTypeID" />
+                <ScalarProperty Name="VisitorStatusID" ColumnName="VisitorStatusID" />
+                <ScalarProperty Name="ValidUntill" ColumnName="ValidUntill" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Web" ColumnName="Web" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitorStatus">
+            <EntityTypeMapping TypeName="VmsModel.VisitorStatu">
+              <MappingFragment StoreEntitySet="VisitorStatus">
+                <ScalarProperty Name="VisitorStatus" ColumnName="VisitorStatus" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitorTypes">
+            <EntityTypeMapping TypeName="VmsModel.VisitorType">
+              <MappingFragment StoreEntitySet="VisitorType">
+                <ScalarProperty Name="VisitorType1" ColumnName="VisitorType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VisitPurposes">
+            <EntityTypeMapping TypeName="VmsModel.VisitPurpose">
+              <MappingFragment StoreEntitySet="VisitPurpose">
+                <ScalarProperty Name="VisitPurpose1" ColumnName="VisitPurpose" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

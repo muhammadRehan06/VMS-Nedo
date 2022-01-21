@@ -1,0 +1,49 @@
+﻿@model IEnumerable<VMS.Models.CompanyModel>
+@{
+    ViewBag.Title = "Company Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <button type="button" class="btn btn-outline-success btn-rounded" onclick="redirect('/Company/Create/')">
+                            Add New
+                        </button>
+                        <table id="state-saving-datatable" class="table activate-select dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th>Logo</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Contact</th>
+                                    <th>Active/InActive</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ImageUrl</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.Contact</td>
+                                        <td>@item.StatusId</td>
+                                        <td><button class="btn ri-edit-box-fill"></button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div> <!-- end card body-->
+                </div> <!-- end card -->
+            </div><!-- end col-->
+        </div>
+    </div>
+</div>
